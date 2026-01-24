@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QSec Labs - Quantum Vulnerability Intelligence</title>
+    <meta name="description" content="Post-quantum cryptography readiness data for enterprise security teams, insurers, and investment analysts.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #fafafa;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a2e;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #6366f1;
+        }
+
+        .nav-link {
+            color: #4b5563;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            background: #f3f4f6;
+            color: #1a1a2e;
+        }
+
+        .nav-link.primary {
+            background: #6366f1;
+            color: #fff;
+        }
+
+        .nav-link.primary:hover {
+            background: #4f46e5;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #eef2ff;
+            color: #6366f1;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: #1a1a2e;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #4b5563;
+            margin-bottom: 32px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #6366f1;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #4f46e5;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: #1a1a2e;
+            border: 1px solid #e5e7eb;
+        }
+
+        .btn-secondary:hover {
+            background: #f9fafb;
+            border-color: #d1d5db;
+        }
+
+        /* Features */
+        .features {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-title p {
+            color: #6b7280;
+            font-size: 18px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            padding: 32px;
+            background: #f9fafb;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: #eef2ff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #6b7280;
+        }
+
+        /* Data Section */
+        .data-section {
+            padding: 80px 0;
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        .data-section h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .data-section > .container > p {
+            color: #9ca3af;
+            font-size: 18px;
+            margin-bottom: 48px;
+        }
+
+        .data-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #6366f1;
+        }
+
+        .stat-label {
+            color: #9ca3af;
+            margin-top: 8px;
+        }
+
+        /* Use Cases */
+        .use-cases {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .use-case {
+            padding: 24px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+        }
+
+        .use-case h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .use-case p {
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            text-align: center;
+            color: #fff;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 32px;
+        }
+
+        .cta-section .btn {
+            background: #fff;
+            color: #6366f1;
+        }
+
+        .cta-section .btn:hover {
+            background: #f9fafb;
+        }
+
+        /* Footer */
+        footer {
+            padding: 48px 0;
+            background: #1a1a2e;
+            color: #9ca3af;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .footer-logo span {
+            color: #6366f1;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            .section-title h2,
+            .data-section h2,
+            .cta-section h2 {
+                font-size: 28px;
+            }
+
+            .stat-number {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <a href="/" class="logo">QSec<span>Labs</span></a>
+            <nav>
+                <a href="https://aws.amazon.com/marketplace" class="nav-link primary">View on AWS Data Exchange</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge">Quantum Security Intelligence</span>
+                <h1>Prepare Your Organization for the Post-Quantum Era</h1>
+                <p>Enterprise-grade quantum vulnerability assessments for SSL/TLS certificates. Know which cryptographic assets are at risk before quantum computers break them.</p>
+                <div class="cta-group">
+                    <a href="https://aws.amazon.com/marketplace" class="btn btn-primary">Get Sample Data</a>
+                    <a href="#features" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Quantum Vulnerability Data Matters</h2>
+                <p>Quantum computers will break RSA and ECC encryption. The transition to post-quantum cryptography starts now.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">&#128274;</div>
+                    <h3>Shor's Algorithm Threat</h3>
+                    <p>RSA, ECDSA, and ECDH algorithms will be vulnerable to quantum attacks. Our data identifies which organizations are at risk.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128200;</div>
+                    <h3>Risk Scoring</h3>
+                    <p>Proprietary quantum risk scores (0-100) based on algorithm type, key size, and TLS configuration. Prioritize remediation efforts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128197;</div>
+                    <h3>Regulatory Compliance</h3>
+                    <p>Japan targets 2035 for PQC migration. NIST finalized post-quantum standards in 2024. Stay ahead of mandates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="data-section">
+        <div class="container">
+            <h2>Japan Listed Companies Database</h2>
+            <p>Comprehensive quantum vulnerability assessments for Japanese publicly traded companies.</p>
+            <div class="data-stats">
+                <div class="stat">
+                    <div class="stat-number">4,000+</div>
+                    <div class="stat-label">Listed Companies</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">24</div>
+                    <div class="stat-label">Data Fields</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">96%+</div>
+                    <div class="stat-label">Scan Success Rate</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">Monthly</div>
+                    <div class="stat-label">Update Frequency</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="use-cases">
+        <div class="container">
+            <div class="section-title">
+                <h2>Who Uses This Data</h2>
+                <p>Actionable intelligence for security-conscious organizations</p>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case">
+                    <h3>Security Vendors</h3>
+                    <p>Lead generation for PQC migration consulting and implementation services.</p>
+                </div>
+                <div class="use-case">
+                    <h3>Cyber Insurance</h3>
+                    <p>Quantitative risk assessment for underwriting and portfolio analysis.</p>
+                </div>
+                <div class="use-case">
+                    <h3>Investment Funds</h3>
+                    <p>ESG and cybersecurity risk evaluation for due diligence.</p>
+                </div>
+                <div class="use-case">
+                    <h3>Auditors & Consultants</h3>
+                    <p>Compliance assessment and risk advisory services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Start with Free Sample Data</h2>
+            <p>Evaluate our quantum vulnerability database with a free sample of top 10 companies.</p>
+            <a href="https://aws.amazon.com/marketplace" class="btn">Access on AWS Data Exchange</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-logo">QSec<span>Labs</span></div>
+            <div class="footer-links">
+                <a href="mailto:contact@qseclabs.com">Contact</a>
+                <a href="https://aws.amazon.com/marketplace">AWS Data Exchange</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
