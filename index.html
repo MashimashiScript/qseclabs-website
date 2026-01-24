@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QSec Labs - Quantum Vulnerability Intelligence</title>
-    <meta name="description" content="Post-quantum cryptography readiness data for enterprise security teams, insurers, and investment analysts.">
+    <title>QSec Labs | Quantum Vulnerability Intelligence</title>
+    <meta name="description" content="Enterprise quantum vulnerability data for the post-quantum era.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,28 +15,54 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-primary: #06060a;
+            --bg-secondary: #0c0c14;
+            --bg-card: #101018;
+            --border: #1a1a28;
+            --text-primary: #e8e8ec;
+            --text-secondary: #6b6b7b;
+            --text-muted: #404050;
+            --accent: #7c5bf5;
+            --accent-dim: #5a3dd1;
+            --accent-glow: rgba(124, 91, 245, 0.15);
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
-            color: #1a1a2e;
-            background: #fafafa;
+            font-size: 14px;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 48px;
+        }
+
+        /* Particle Canvas */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
         }
 
         /* Header */
         header {
-            background: #fff;
-            border-bottom: 1px solid #e5e7eb;
-            padding: 16px 0;
             position: fixed;
-            width: 100%;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 100;
+            padding: 24px 0;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, transparent 100%);
         }
 
         .header-inner {
@@ -46,328 +72,475 @@
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1a1a2e;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
             text-decoration: none;
         }
 
         .logo span {
-            color: #6366f1;
+            color: var(--accent);
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
         }
 
         .nav-link {
-            color: #4b5563;
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-secondary);
             text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 6px;
-            transition: all 0.2s;
+            letter-spacing: 0.3px;
+            transition: color 0.2s;
         }
 
         .nav-link:hover {
-            background: #f3f4f6;
-            color: #1a1a2e;
+            color: var(--text-primary);
         }
 
-        .nav-link.primary {
-            background: #6366f1;
-            color: #fff;
+        .nav-btn {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s;
         }
 
-        .nav-link.primary:hover {
-            background: #4f46e5;
+        .nav-btn:hover {
+            border-color: var(--accent);
+            background: var(--accent-glow);
         }
 
         /* Hero */
         .hero {
-            padding: 140px 0 80px;
-            background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
         }
 
         .hero-content {
-            max-width: 700px;
+            max-width: 640px;
         }
 
-        .badge {
-            display: inline-block;
-            background: #eef2ff;
-            color: #6366f1;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 14px;
+        .hero-label {
+            font-size: 10px;
             font-weight: 500;
-            margin-bottom: 24px;
-        }
-
-        h1 {
-            font-size: 48px;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 24px;
-            color: #1a1a2e;
-        }
-
-        .hero p {
-            font-size: 20px;
-            color: #4b5563;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
             margin-bottom: 32px;
         }
 
-        .cta-group {
+        h1 {
+            font-size: 42px;
+            font-weight: 300;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            margin-bottom: 32px;
+        }
+
+        h1 strong {
+            font-weight: 600;
+        }
+
+        .hero-description {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 48px;
+            max-width: 480px;
+        }
+
+        .hero-cta {
             display: flex;
             gap: 16px;
-            flex-wrap: wrap;
         }
 
         .btn {
-            display: inline-block;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
             padding: 14px 28px;
-            border-radius: 8px;
-            font-weight: 600;
             text-decoration: none;
             transition: all 0.2s;
         }
 
         .btn-primary {
-            background: #6366f1;
+            background: var(--accent);
             color: #fff;
+            border: 1px solid var(--accent);
         }
 
         .btn-primary:hover {
-            background: #4f46e5;
-            transform: translateY(-1px);
+            background: var(--accent-dim);
+            border-color: var(--accent-dim);
         }
 
-        .btn-secondary {
-            background: #fff;
-            color: #1a1a2e;
-            border: 1px solid #e5e7eb;
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
         }
 
-        .btn-secondary:hover {
-            background: #f9fafb;
-            border-color: #d1d5db;
+        .btn-ghost:hover {
+            color: var(--text-primary);
+            border-color: var(--text-muted);
         }
 
-        /* Features */
-        .features {
-            padding: 80px 0;
-            background: #fff;
+        /* Stats Bar */
+        .stats-bar {
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 48px 0;
+            background: var(--bg-secondary);
         }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .section-title h2 {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .section-title p {
-            color: #6b7280;
-            font-size: 18px;
-        }
-
-        .features-grid {
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 32px;
-        }
-
-        .feature-card {
-            padding: 32px;
-            background: #f9fafb;
-            border-radius: 12px;
-            border: 1px solid #e5e7eb;
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            background: #eef2ff;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-
-        .feature-card h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .feature-card p {
-            color: #6b7280;
-        }
-
-        /* Data Section */
-        .data-section {
-            padding: 80px 0;
-            background: #1a1a2e;
-            color: #fff;
-        }
-
-        .data-section h2 {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .data-section > .container > p {
-            color: #9ca3af;
-            font-size: 18px;
-            margin-bottom: 48px;
-        }
-
-        .data-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 32px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 48px;
         }
 
         .stat {
             text-align: center;
         }
 
-        .stat-number {
-            font-size: 48px;
-            font-weight: 700;
-            color: #6366f1;
+        .stat-value {
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: -1px;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .stat-value span {
+            color: var(--accent);
         }
 
         .stat-label {
-            color: #9ca3af;
-            margin-top: 8px;
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* Section */
+        section {
+            position: relative;
+            z-index: 1;
+            padding: 120px 0;
+        }
+
+        .section-header {
+            margin-bottom: 64px;
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: -0.3px;
+        }
+
+        h2 strong {
+            font-weight: 600;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+
+        .feature {
+            padding: 48px 32px;
+            background: var(--bg-card);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            opacity: 0.6;
+        }
+
+        .feature h3 {
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            margin-bottom: 12px;
+        }
+
+        .feature p {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.7;
         }
 
         /* Use Cases */
         .use-cases {
-            padding: 80px 0;
-            background: #fff;
+            background: var(--bg-secondary);
         }
 
         .use-cases-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 24px;
         }
 
         .use-case {
-            padding: 24px;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
+            padding: 32px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        .use-case-label {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 12px;
         }
 
         .use-case h3 {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 15px;
+            font-weight: 500;
             margin-bottom: 8px;
         }
 
         .use-case p {
-            color: #6b7280;
-            font-size: 15px;
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+
+        /* Data Schema */
+        .schema-preview {
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            overflow: hidden;
+        }
+
+        .schema-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .schema-title {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .schema-badge {
+            font-size: 10px;
+            font-weight: 500;
+            padding: 4px 10px;
+            background: var(--accent-glow);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .schema-content {
+            padding: 24px;
+        }
+
+        .schema-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .schema-table th,
+        .schema-table td {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .schema-table th {
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 10px;
+        }
+
+        .schema-table td {
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+
+        .schema-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .schema-table code {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 11px;
+            color: var(--text-primary);
         }
 
         /* CTA Section */
         .cta-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
             text-align: center;
-            color: #fff;
+            padding: 160px 0;
         }
 
         .cta-section h2 {
-            font-size: 36px;
-            font-weight: 700;
             margin-bottom: 16px;
         }
 
         .cta-section p {
-            font-size: 18px;
-            opacity: 0.9;
-            margin-bottom: 32px;
-        }
-
-        .cta-section .btn {
-            background: #fff;
-            color: #6366f1;
-        }
-
-        .cta-section .btn:hover {
-            background: #f9fafb;
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
         }
 
         /* Footer */
         footer {
+            position: relative;
+            z-index: 1;
             padding: 48px 0;
-            background: #1a1a2e;
-            color: #9ca3af;
+            border-top: 1px solid var(--border);
         }
 
         .footer-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 24px;
         }
 
         .footer-logo {
-            font-size: 20px;
-            font-weight: 700;
-            color: #fff;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
         }
 
         .footer-logo span {
-            color: #6366f1;
+            color: var(--accent);
         }
 
         .footer-links {
             display: flex;
-            gap: 24px;
+            gap: 32px;
         }
 
         .footer-links a {
-            color: #9ca3af;
+            font-size: 12px;
+            color: var(--text-muted);
             text-decoration: none;
+            transition: color 0.2s;
         }
 
         .footer-links a:hover {
-            color: #fff;
+            color: var(--text-secondary);
+        }
+
+        .footer-copy {
+            font-size: 11px;
+            color: var(--text-muted);
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 32px;
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 32px;
             }
 
-            .section-title h2,
-            .data-section h2,
-            .cta-section h2 {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .use-cases-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+
+            h1 {
                 font-size: 28px;
             }
 
-            .stat-number {
-                font-size: 36px;
+            h2 {
+                font-size: 22px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
+    <canvas id="particles"></canvas>
+
     <header>
         <div class="container header-inner">
-            <a href="/" class="logo">QSec<span>Labs</span></a>
+            <a href="/" class="logo">QSEC<span>LABS</span></a>
             <nav>
-                <a href="https://aws.amazon.com/marketplace" class="nav-link primary">View on AWS Data Exchange</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#data" class="nav-link">Data Schema</a>
+                <a href="https://aws.amazon.com/marketplace" class="nav-btn">Access Data</a>
             </nav>
         </div>
     </header>
@@ -375,36 +548,62 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <span class="badge">Quantum Security Intelligence</span>
-                <h1>Prepare Your Organization for the Post-Quantum Era</h1>
-                <p>Enterprise-grade quantum vulnerability assessments for SSL/TLS certificates. Know which cryptographic assets are at risk before quantum computers break them.</p>
-                <div class="cta-group">
+                <div class="hero-label">Quantum Security Intelligence</div>
+                <h1>Prepare for the <strong>Post-Quantum Era</strong></h1>
+                <p class="hero-description">
+                    Enterprise-grade quantum vulnerability assessments for SSL/TLS infrastructure.
+                    Identify cryptographic assets at risk before quantum computers compromise them.
+                </p>
+                <div class="hero-cta">
                     <a href="https://aws.amazon.com/marketplace" class="btn btn-primary">Get Sample Data</a>
-                    <a href="#features" class="btn btn-secondary">Learn More</a>
+                    <a href="#features" class="btn btn-ghost">Learn More</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="features" id="features">
+    <div class="stats-bar">
         <div class="container">
-            <div class="section-title">
-                <h2>Why Quantum Vulnerability Data Matters</h2>
-                <p>Quantum computers will break RSA and ECC encryption. The transition to post-quantum cryptography starts now.</p>
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-value">4,000<span>+</span></div>
+                    <div class="stat-label">Listed Companies</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">Data Fields</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">96<span>%</span></div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">Monthly</div>
+                    <div class="stat-label">Updates</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Why This Matters</div>
+                <h2>Quantum computers will break <strong>RSA and ECC</strong></h2>
             </div>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">&#128274;</div>
+                <div class="feature">
+                    <div class="feature-icon">◈</div>
                     <h3>Shor's Algorithm Threat</h3>
-                    <p>RSA, ECDSA, and ECDH algorithms will be vulnerable to quantum attacks. Our data identifies which organizations are at risk.</p>
+                    <p>RSA, ECDSA, and ECDH algorithms are vulnerable to quantum attacks. Our data identifies which organizations are at risk.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#128200;</div>
-                    <h3>Risk Scoring</h3>
-                    <p>Proprietary quantum risk scores (0-100) based on algorithm type, key size, and TLS configuration. Prioritize remediation efforts.</p>
+                <div class="feature">
+                    <div class="feature-icon">◇</div>
+                    <h3>Proprietary Risk Scoring</h3>
+                    <p>Quantum risk scores (0-100) based on algorithm type, key size, and TLS configuration. Prioritize remediation efforts.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#128197;</div>
+                <div class="feature">
+                    <div class="feature-icon">◆</div>
                     <h3>Regulatory Compliance</h3>
                     <p>Japan targets 2035 for PQC migration. NIST finalized post-quantum standards in 2024. Stay ahead of mandates.</p>
                 </div>
@@ -412,53 +611,90 @@
         </div>
     </section>
 
-    <section class="data-section">
+    <section class="use-cases">
         <div class="container">
-            <h2>Japan Listed Companies Database</h2>
-            <p>Comprehensive quantum vulnerability assessments for Japanese publicly traded companies.</p>
-            <div class="data-stats">
-                <div class="stat">
-                    <div class="stat-number">4,000+</div>
-                    <div class="stat-label">Listed Companies</div>
+            <div class="section-header">
+                <div class="section-label">Applications</div>
+                <h2>Built for <strong>enterprise use cases</strong></h2>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case">
+                    <div class="use-case-label">Security Vendors</div>
+                    <h3>Lead Generation</h3>
+                    <p>Identify prospects for PQC migration consulting and implementation services.</p>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">24</div>
-                    <div class="stat-label">Data Fields</div>
+                <div class="use-case">
+                    <div class="use-case-label">Cyber Insurance</div>
+                    <h3>Risk Assessment</h3>
+                    <p>Quantitative data for underwriting decisions and portfolio risk analysis.</p>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">96%+</div>
-                    <div class="stat-label">Scan Success Rate</div>
+                <div class="use-case">
+                    <div class="use-case-label">Investment Funds</div>
+                    <h3>Due Diligence</h3>
+                    <p>ESG and cybersecurity risk evaluation for investment decisions.</p>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">Monthly</div>
-                    <div class="stat-label">Update Frequency</div>
+                <div class="use-case">
+                    <div class="use-case-label">Auditors</div>
+                    <h3>Compliance Advisory</h3>
+                    <p>Data-driven compliance assessment and cryptographic readiness reports.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="use-cases">
+    <section id="data">
         <div class="container">
-            <div class="section-title">
-                <h2>Who Uses This Data</h2>
-                <p>Actionable intelligence for security-conscious organizations</p>
+            <div class="section-header">
+                <div class="section-label">Data Schema</div>
+                <h2>Comprehensive <strong>certificate analysis</strong></h2>
             </div>
-            <div class="use-cases-grid">
-                <div class="use-case">
-                    <h3>Security Vendors</h3>
-                    <p>Lead generation for PQC migration consulting and implementation services.</p>
+            <div class="schema-preview">
+                <div class="schema-header">
+                    <span class="schema-title">Sample Fields</span>
+                    <span class="schema-badge">24 Total Fields</span>
                 </div>
-                <div class="use-case">
-                    <h3>Cyber Insurance</h3>
-                    <p>Quantitative risk assessment for underwriting and portfolio analysis.</p>
-                </div>
-                <div class="use-case">
-                    <h3>Investment Funds</h3>
-                    <p>ESG and cybersecurity risk evaluation for due diligence.</p>
-                </div>
-                <div class="use-case">
-                    <h3>Auditors & Consultants</h3>
-                    <p>Compliance assessment and risk advisory services.</p>
+                <div class="schema-content">
+                    <table class="schema-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>quantum_vulnerable</code></td>
+                                <td>Boolean</td>
+                                <td>Vulnerable to quantum attacks (YES/NO)</td>
+                            </tr>
+                            <tr>
+                                <td><code>quantum_risk_score</code></td>
+                                <td>Integer</td>
+                                <td>Risk score 0-100 (higher = more vulnerable)</td>
+                            </tr>
+                            <tr>
+                                <td><code>risk_level</code></td>
+                                <td>Enum</td>
+                                <td>CRITICAL / HIGH / MEDIUM / LOW / NONE</td>
+                            </tr>
+                            <tr>
+                                <td><code>cert_algorithm</code></td>
+                                <td>String</td>
+                                <td>Public key algorithm (RSA, EC, etc.)</td>
+                            </tr>
+                            <tr>
+                                <td><code>cert_key_size</code></td>
+                                <td>Integer</td>
+                                <td>Key size in bits</td>
+                            </tr>
+                            <tr>
+                                <td><code>has_perfect_forward_secrecy</code></td>
+                                <td>Boolean</td>
+                                <td>PFS support status</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -466,20 +702,102 @@
 
     <section class="cta-section">
         <div class="container">
-            <h2>Start with Free Sample Data</h2>
-            <p>Evaluate our quantum vulnerability database with a free sample of top 10 companies.</p>
-            <a href="https://aws.amazon.com/marketplace" class="btn">Access on AWS Data Exchange</a>
+            <div class="section-label">Get Started</div>
+            <h2>Access <strong>sample data</strong> for free</h2>
+            <p>Evaluate our quantum vulnerability database with a sample of top 10 companies.</p>
+            <a href="https://aws.amazon.com/marketplace" class="btn btn-primary">View on AWS Data Exchange</a>
         </div>
     </section>
 
     <footer>
         <div class="container footer-inner">
-            <div class="footer-logo">QSec<span>Labs</span></div>
+            <div class="footer-logo">QSEC<span>LABS</span></div>
             <div class="footer-links">
                 <a href="mailto:contact@qseclabs.com">Contact</a>
                 <a href="https://aws.amazon.com/marketplace">AWS Data Exchange</a>
             </div>
+            <div class="footer-copy">© 2026 QSec Labs</div>
         </div>
     </footer>
+
+    <script>
+        // Quantum Particle Animation
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+
+        let particles = [];
+        let connections = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function createParticles() {
+            particles = [];
+            const count = Math.floor((canvas.width * canvas.height) / 25000);
+
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3,
+                    radius: Math.random() * 1.5 + 0.5,
+                    alpha: Math.random() * 0.5 + 0.1
+                });
+            }
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw connections
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 150) {
+                        const alpha = (1 - dist / 150) * 0.15;
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(124, 91, 245, ${alpha})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Draw particles
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(124, 91, 245, ${p.alpha})`;
+                ctx.fill();
+
+                // Update position
+                p.x += p.vx;
+                p.y += p.vy;
+
+                // Boundary check
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+            });
+
+            requestAnimationFrame(drawParticles);
+        }
+
+        window.addEventListener('resize', () => {
+            resize();
+            createParticles();
+        });
+
+        resize();
+        createParticles();
+        drawParticles();
+    </script>
 </body>
 </html>
